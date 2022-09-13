@@ -59,7 +59,7 @@ if (date) {
     filters[filterID] = date
   }
   else {
-    delete
+    delete filters[filterID]
   }
 
     // 6. Call function to apply all filters and rebuild the table
@@ -72,17 +72,22 @@ if (date) {
   
     // 8. Set the filtered data to the tableData.
     
+    
+    let filteredData = tableData;
   
     // 9. Loop through all of the filters and keep any data that
     // matches the filter values
-    
+    if (date) {
+      filteredData = filteredData.filter(row => row.datetime === date);
+    };
   
+      
     // 10. Finally, rebuild the table using the filtered data
     
   }
   
   // 2. Attach an event to listen for changes to each filter
-  
+  d3.selectAll("Input").on("change", updateFilters);
   
   // Build the table when the page loads
   buildTable(tableData);
